@@ -2,7 +2,7 @@
     <a  href="#" class="list-group-item list-group-item-action border-0">
         <div class="d-flex align-items-start">
             <img src="../assets/man.png"
-                 class="rounded-circle mr-0" alt="Vanessa Tucker" width="30" height="30">
+                 class=" mr-0" alt="Vanessa Tucker" width="30" height="30">
             <div class="flex-grow-1 mx-2">
                 {{ q }}
                 <img v-if="type == 'contractInformation'" src="../assets/information.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">

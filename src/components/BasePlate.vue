@@ -24,7 +24,7 @@
                     <div class="d-flex align-items-center py-1">
                         <div class="position-relative">
                             <img src="../assets/ai.png"
-                                 class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                 class=" me-1" alt="Sharon Lessman" width="40" height="40">
                         </div>
                         <div class="flex-grow-1 pl-3">
                             <strong>WizBuddy</strong>
@@ -43,22 +43,22 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-1 text-center px-0">
-                                        <img v-if="selectedValue == 'contractInformation'" src="../assets/information.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                        <img v-if="selectedValue == 'employeeInformation'" src="../assets/skill.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                        <img v-if="selectedValue == 'healthNBenefit'" src="../assets/medical-policy.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                        <img v-if="selectedValue == 'contractInformation'" src="../assets/information.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
+                                        <img v-if="selectedValue == 'employeeInformation'" src="../assets/skill.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
+                                        <img v-if="selectedValue == 'healthNBenefit'" src="../assets/medical-policy.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
                                     </div>
-                                    <div class="col-3 px-0">
+                                    <div class="col-3">
                                         <select class="form-select" v-model="selectedValue">
                                             <option v-for="option in options" :value="option.value">
                                                 {{ option.text }}
                                             </option>
                                         </select>
                                     </div>
-                                    <div class="col-7 px-0">
+                                    <div class="col-7">
                                         <input v-model="query" type="text" class="form-control" placeholder="Type your message">
                                     </div>
-                                    <div class="col-1 px-0">
-                                        <button type="submit" class="btn btn-primary">Send</button>
+                                    <div class="col-1">
+                                        <button type="submit" class="btn btn-success">Send</button>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@ export default {
             })
             this.messages.push({
                 'type': 'chat-message-right',
-                'time': new Date().toLocaleTimeString(),
+                'time': new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
                 'message': this.query
             })
             var selector = 'other/'
@@ -115,7 +115,7 @@ export default {
                     this.messages.push(
                         {
                             'type': 'chat-message-left',
-                            'time': new Date().toLocaleTimeString(),
+                            'time': new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
                             'message': response.data.message
                         }
                     )
@@ -124,7 +124,7 @@ export default {
                     this.messages.push(
                         {
                             'type': 'chat-message-left',
-                            'time': new Date().toLocaleTimeString(),
+                            'time': new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
                             'message': "Sorry for My Poor Server. It can't handle too much load. Please try again."
                         }
                     )
@@ -142,7 +142,7 @@ export default {
                 this.messages.push(
                     {
                         'type': 'chat-message-left',
-                        'time': new Date().toLocaleTimeString(),
+                        'time': new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
                         'message': response.data.message
                     }
                 )
