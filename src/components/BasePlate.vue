@@ -1,16 +1,20 @@
 <template>
-    <h1 class="h3 mb-3">WizBuddy</h1>
+    <h1 class="h3 mb-3 text-success fw-bold">WizBuddy</h1>
     <div class="card">
         <div class="row g-0">
             <div class="col-12 col-lg-5 col-xl-3 border-end">
-                <div class="px-4 d-none d-md-block">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <h4 class="text-center pt-1 text-success">Chat History</h4>
+                <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                    <div class="d-flex align-items-center py-1">
+                        <div class="position-relative">
+                            <img src="../assets/history.png"
+                                 class=" me-1" alt="Sharon Lessman" width="40" height="40">
+                        </div>
+                        <div class="flex-grow-1 pl-3">
+                            <strong>Chat History</strong>
                         </div>
                     </div>
                 </div>
-                <div class="px-4 d-none d-md-block">
+                <div class="chat-history px-1 d-none d-md-block">
                     <div class="d-flex">
                         <div class="flex-grow-1">
                             <HistoryItem v-for="history in histories" :type="history.type" :q="history.q"/>
