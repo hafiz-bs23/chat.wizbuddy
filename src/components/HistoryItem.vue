@@ -8,7 +8,7 @@
                     {{ q }}
                     <img v-if="type == 'contractInformation'" src="../assets/information.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
                     <img v-if="type == 'employeeInformation'" src="../assets/skill.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
-                    <img v-if="type == 'healthNBenefit'" src="../assets/medical-policy.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
+                    <img v-if="type == 'bsInfo'" src="../assets/bslogo.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
                 </div>
             </div>
         </a>

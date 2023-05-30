@@ -32,7 +32,14 @@
                         </div>
                         <div class="flex-grow-1 pl-3">
                             <strong>WizBuddy</strong>
-                            <div class="text-muted small"><em>Looking for answers....</em></div>
+                            <div v-if="botStatus == 'Online'" class="text-muted small"> <span class="badge rounded-pill bg-success">{{ botStatus }}</span></div>
+                            <div v-if="botStatus != 'Online'" class="text-muted small" style="min-height: 21px;"> <Transition><span v-show="blink" class="badge rounded-pill bg-info">{{ botStatus }} </span></Transition></div>
+                        </div>
+                        <div>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#howTo" class="btn btn-outline-success me-2">How to Ask</button>
+                            <modal/>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#about" class="btn btn-outline-primary">About</button>
+                            <About />
                         </div>
                     </div>
                 </div>
@@ -49,7 +56,7 @@
                                     <div class="col-1 text-center px-0">
                                         <img v-if="selectedValue == 'contractInformation'" src="../assets/information.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
                                         <img v-if="selectedValue == 'employeeInformation'" src="../assets/skill.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
-                                        <img v-if="selectedValue == 'healthNBenefit'" src="../assets/medical-policy.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
+                                        <img v-if="selectedValue == 'bsInfo'" src="../assets/bslogo.png" class=" mr-1" alt="Sharon Lessman" width="40" height="40">
                                     </div>
                                     <div class="col-3">
                                         <select class="form-select" v-model="selectedValue">
@@ -59,10 +66,10 @@
                                         </select>
                                     </div>
                                     <div class="col-7">
-                                        <input v-model="query" type="text" class="form-control" placeholder="Type your message">
+                                        <input v-model="query" type="text" class="form-control" placeholder="Type your message" :disabled="botStatus == 'Query is processing'">
                                     </div>
                                     <div class="col-1">
-                                        <button type="submit" class="btn btn-success">Send</button>
+                                        <button type="submit" class="btn btn-success" :disabled="botStatus == 'Query is processing'">Send</button>
                                     </div>
                                 </div>
                             </div>
@@ -80,6 +87,9 @@ import MessageItem from "@/components/MessageItem.vue";
 import HistoryItem from "@/components/HistoryItem.vue";
 
 import axios from "axios";
+import {bottom} from "@popperjs/core";
+import modal from "@/components/modal.vue";
+import About from "@/components/About.vue";
 
 
 export default {
@@ -87,20 +97,23 @@ export default {
     data() {
         return{
             selectedValue: 'contractInformation',
-            botStatus: 'online',
             query: '',
             options:[
                 { text: 'Contract Information', value: 'contractInformation'},
                 { text: 'Employee Information', value: 'employeeInformation'},
-                { text: 'Health Insurance Benefit', value: 'healthNBenefit'},
+                { text: 'Brain Station 23', value: 'bsInfo'},
             ],
             messages: [],
-            histories: []
+            histories: [],
+            botStatus: 'Online',
+            blink: true,
+            timer: null
         }
 
     },
     methods:{
         processQuery(){
+            this.botStatus = "Query is processing"
             this.histories.push({
                 'type': this.selectedValue,
                 'q': this.query
@@ -120,9 +133,10 @@ export default {
                         {
                             'type': 'chat-message-left',
                             'time': new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
-                            'message': response.data.message
+                            'message': response.data.message.replace('\n', '<br>')
                         }
                     )
+                    this.botStatus = 'Online'
                 })
                 .catch(error => {
                     this.messages.push(
@@ -132,14 +146,17 @@ export default {
                             'message': "Sorry for My Poor Server. It can't handle too much load. Please try again."
                         }
                     )
+                    this.botStatus = 'Online'
                 })
             this.query = ''
-        }
+        },
     },
     components:{
-        MessageItem, HistoryItem
+        About,
+        MessageItem, HistoryItem, modal
     },
     mounted() {
+        this.botStatus = "Query is processing"
         axios
             .get('https://wizbuddy.herokuapp.com/')
             .then(response => {
@@ -150,14 +167,30 @@ export default {
                         'message': response.data.message
                     }
                 )
+                this.botStatus = 'Online'
             })
             .catch(error=> {
                 console.log(error)
+                this.botStatus = 'Online'
             })
+        this.timer = setInterval(() =>{
+            this.blink = !this.blink
+        },300)
+    },
+    beforeUnmount() {
+        clearInterval(this.timer)
     }
 }
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.3s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
 </style>
