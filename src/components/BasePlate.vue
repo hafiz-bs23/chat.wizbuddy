@@ -96,10 +96,10 @@ export default {
     name: "BasePlate",
     data() {
         return{
-            selectedValue: 'contractInformation',
+            selectedValue: 'bsInfo',
             query: '',
             options:[
-                { text: 'Contract Information', value: 'contractInformation'},
+                { text: 'Contact Information', value: 'contractInformation'},
                 { text: 'Employee Information', value: 'employeeInformation'},
                 { text: 'Brain Station 23', value: 'bsInfo'},
             ],
