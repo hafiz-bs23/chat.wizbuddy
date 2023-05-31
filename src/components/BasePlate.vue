@@ -16,8 +16,8 @@
                 </div>
                 <div class="chat-history px-1 d-none d-md-block">
                     <div class="d-flex">
-                        <div class="flex-grow-1">
-                            <HistoryItem v-for="history in histories" :type="history.type" :q="history.q"/>
+                        <div class="flex-grow-1 d-flex flex-column-reverse">
+                            <HistoryItem v-for="history in histories" :type="history.type" :q="history.q" :callMethod="processQueryfromHistory"/>
                         </div>
                     </div>
                 </div>
@@ -90,6 +90,7 @@ import axios from "axios";
 import {bottom} from "@popperjs/core";
 import modal from "@/components/modal.vue";
 import About from "@/components/About.vue";
+import {v4 as uuid4} from 'uuid';
 
 
 export default {
@@ -150,6 +151,10 @@ export default {
                 })
             this.query = ''
         },
+        processQueryfromHistory(type, q){
+            this.selectedValue = type;
+            this.query = q;
+        }
     },
     components:{
         About,

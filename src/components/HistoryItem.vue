@@ -1,6 +1,6 @@
 <template>
-    <div class="border-bottom border-info l mt-2">
-        <a  href="#" class="list-group-item list-group-item-action border-0">
+    <div class="border-bottom border-info l mt-2 history-item">
+        <a  @click="callMethod(type,q)" class="list-group-item list-group-item-action border-0">
             <div class="d-flex align-items-center">
                 <img src="../assets/man.png"
                      class=" mr-0" alt="Vanessa Tucker" width="30" height="30">
@@ -18,10 +18,12 @@
 <script>
 export default {
     name: "HistoryItem",
-    props:['type','q']
+    props:['type','q','callMethod']
 }
 </script>
 
 <style scoped>
-
+.history-item{
+    cursor: pointer;
+}
 </style>

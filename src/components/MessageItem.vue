@@ -15,7 +15,10 @@
                  class=" mr-1" alt="Sharon Lessman" width="40" height="40">
             <div class="text-muted small text-nowrap mt-2">{{ time }}</div>
         </div>
-        <div v-html="message" class="d-flex align-items-center flex-shrink-1 rounded py-2 px-4 ml-3 rounded-3 text-white" style="background-color: #7eaacd;">
+        <div class="d-flex align-items-center flex-shrink-1 rounded py-2 px-4 ml-3 rounded-3 text-white" style="background-color: #7eaacd;">
+            <div  id="messageItem">
+                {{displayMessage}}<span v-if="!stopMessage" class="blink_me">|</span>
+            </div>
         </div>
     </div>
 </template>
@@ -23,10 +26,40 @@
 <script>
 export default {
     name: "MessageItem",
-    props:['type','time','message']
+    props:['type','time','message'],
+    data(){
+        return{
+          index: 0,
+          speed:50,
+          displayMessage: "",
+          stopMessage: false,
+    }
+    },
+    methods:{
+        typeWriter(){
+            if( this.index < this.message.length ){
+                this.displayMessage += this.message.charAt(this.index)
+                this.index++;
+                setTimeout(this.typeWriter,this.speed)
+            }else{
+                this.stopMessage = true;
+            }
+        }
+    },
+    mounted(){
+        this.typeWriter()
+    }
 }
 </script>
 
 <style scoped>
+.blink_me {
+    animation: blinker 1s linear infinite;
+}
 
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
 </style>
