@@ -2,6 +2,7 @@
 import BasePlate from './components/BasePlate.vue'
 
 import axios from "axios";
+import Error404 from "@/components/Error404.vue";
 axios({
     method: 'post',
     url: 'https://jsonplaceholder.typicode.com/posts',
@@ -15,7 +16,8 @@ export default {
     name: 'App',
     data (){
         return{
-            title: 'Let\'s be serious from title'
+            title: 'Let\'s be serious from title',
+            isLive: false,
         }
     },
     methods: {
@@ -26,6 +28,7 @@ export default {
         }
     },
     components:{
+        Error404,
         BasePlate
     }
 }
@@ -35,9 +38,12 @@ export default {
   <header>
   </header>
     <main class="content">
-          <div class="container p-0">
+          <div v-if="isLive" class="container p-0">
               <BasePlate />
           </div>
+        <div v-if="!isLive" class="container p-0">
+            <Error404 />
+        </div>
       </main>
 </template>
 

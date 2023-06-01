@@ -2,24 +2,29 @@
     <h1 class="h3 mb-3 text-success fw-bold">WizBuddy</h1>
     <div class="card">
         <div class="row g-0">
-            <div class="col-12 col-lg-5 col-xl-3 border-end">
-                <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                    <div class="d-flex align-items-center py-1">
-                        <div class="position-relative">
-                            <img src="../assets/history.png"
-                                 class=" me-1" alt="Sharon Lessman" width="40" height="40">
+            <div class="col-12 col-lg-5 col-xl-3 border-end d-flex flex-column justify-content-between">
+                <div>
+                    <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                        <div class="d-flex align-items-center py-1">
+                            <div class="position-relative">
+                                <img src="../assets/history.png"
+                                     class=" me-1" alt="Sharon Lessman" width="40" height="40">
+                            </div>
+                            <div class="flex-grow-1 pl-3">
+                                <strong>Chat History</strong>
+                            </div>
                         </div>
-                        <div class="flex-grow-1 pl-3">
-                            <strong>Chat History</strong>
+                    </div>
+                    <div class="chat-history px-1 d-none d-md-block">
+                        <div class="d-flex">
+                            <div class="flex-grow-1 d-flex flex-column-reverse">
+                                <HistoryItem v-for="history in histories" :type="history.type" :q="history.q" :callMethod="processQueryfromHistory"/>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="chat-history px-1 d-none d-md-block">
-                    <div class="d-flex">
-                        <div class="flex-grow-1 d-flex flex-column-reverse">
-                            <HistoryItem v-for="history in histories" :type="history.type" :q="history.q" :callMethod="processQueryfromHistory"/>
-                        </div>
-                    </div>
+                <div v-if="haveHistory" class="d-flex justify-content-center">
+                    <button type="button" @click="clearHistory" class="btn btn-outline-success my-3">Clear</button>
                 </div>
                 <hr class="d-block d-lg-none mt-1 mb-0">
             </div>
@@ -108,7 +113,8 @@ export default {
             histories: [],
             botStatus: 'Online',
             blink: true,
-            timer: null
+            timer: null,
+            haveHistory: false,
         }
 
     },
@@ -119,6 +125,9 @@ export default {
                 'type': this.selectedValue,
                 'q': this.query
             })
+            if(this.histories.length > 0){
+                this.haveHistory = true;
+            }
             this.messages.push({
                 'type': 'chat-message-right',
                 'time': new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
@@ -154,6 +163,10 @@ export default {
         processQueryfromHistory(type, q){
             this.selectedValue = type;
             this.query = q;
+        },
+        clearHistory(){
+            this.histories = [];
+            this.haveHistory = false;
         }
     },
     components:{
@@ -161,7 +174,8 @@ export default {
         MessageItem, HistoryItem, modal
     },
     mounted() {
-        this.botStatus = "Query is processing"
+        this.botStatus = "Query is processing";
+        this.haveHistory = false;
         axios
             .get('https://wizbuddy.herokuapp.com/')
             .then(response => {
