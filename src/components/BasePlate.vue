@@ -31,7 +31,7 @@
             <div class="col-12 col-lg-7 col-xl-9">
                 <div class="py-md-2 px-md-4 py-0 px-0 border-bottom">
                     <div class="d-flex align-items-center py-1">
-                        <div class="container sticky-top">
+                        <div class="container position-relative">
                             <div class="row">
                                 <div class="col-6 col-md-1 d-flex justify-content-end pe-0">
                                     <img src="../assets/ai.png"
