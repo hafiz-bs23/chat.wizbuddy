@@ -43,8 +43,9 @@
                         <div>
                             <button type="button" data-bs-toggle="modal" data-bs-target="#howTo" class="btn btn-outline-success me-2">How to Ask</button>
                             <modal/>
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#about" class="btn btn-outline-primary">About</button>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#about" class="btn btn-outline-primary me-2">About</button>
                             <About />
+                            <button @click.prevent="logoutUser" type="button" class="btn btn-outline-danger">Logout</button>
                         </div>
                     </div>
                 </div>
@@ -167,6 +168,20 @@ export default {
         clearHistory(){
             this.histories = [];
             this.haveHistory = false;
+        },
+        logoutUser(){
+            debugger;
+          this.delete_cookie();
+            this.$emit('updateAuthStatus', false)
+        },
+        delete_cookie() {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i];
+                const eqPos = cookie.indexOf("=");
+                const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
         }
     },
     components:{
