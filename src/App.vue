@@ -61,13 +61,13 @@ export default {
   <header>
   </header>
     <main class="content">
-          <div v-if="isLive && !isAuthorized" class="container p-0">
-              <UserAuthentication @updateAuthStatus="this.isAuthorized = $event"/>
-          </div>
-          <div v-if="isLive && isAuthorized" class="container p-0">
-              <BasePlate @updateAuthStatus="this.isAuthorized = $event"/>
-          </div>
-        <div v-if="!isLive" class="container p-0">
+        <div v-if="isAuthorized && isLive" class="container p-0">
+            <BasePlate @updateAuthStatus="this.isAuthorized = $event"/>
+        </div>
+        <div v-else-if="!isAuthorized" class="container p-0">
+            <UserAuthentication @updateAuthStatus="this.isAuthorized = $event"/>
+        </div>
+        <div v-if="isAuthorized && !isLive" class="container p-0">
             <Error404 />
         </div>
       </main>
