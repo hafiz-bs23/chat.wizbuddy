@@ -9,7 +9,7 @@ export default {
     data (){
         return{
             title: 'Let\'s be serious from title',
-            isLive: false,
+            isLive: true,
             isAuthorized: false,
             pulseCheckUrl: 'https://bs-employee-management.herokuapp.com/ping'
         }

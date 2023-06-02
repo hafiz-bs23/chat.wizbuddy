@@ -83,9 +83,9 @@ body {
 .chat-messages {
   display: flex;
   flex-direction: column;
-  height: 75vh;
+  height: 65vh;
   justify-content: end;
-  overflow-y: auto
+  overflow-y: auto;
 }
 .chat-history {
   max-height: 84vh;

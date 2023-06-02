@@ -10,9 +10,8 @@
             </div>
         </div>
     <div v-if="type == 'chat-message-left'" class="chat-message-left pb-4">
-        <div class="me-3 text-center">
-            <img src="../assets/ai.png"
-                 class=" mr-1" alt="Sharon Lessman" width="40" height="40">
+        <div class="me-1 md-me-3 text-center">
+            <img src="../assets/ai.png" class="mr-1" width="40" height="40">
             <div class="text-muted small text-nowrap mt-2">{{ time }}</div>
         </div>
         <div class="d-flex align-items-center flex-shrink-1 rounded py-2 px-4 ml-3 rounded-3 text-white" style="background-color: #7eaacd;">
