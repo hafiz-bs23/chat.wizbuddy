@@ -37,8 +37,10 @@
                                     <input v-on:input="resetAlert" type="password" id="loginPassword" class="form-control" v-model="loginUserPassword"/>
                                     <label class="form-label" for="loginPassword">Password</label>
                                 </div>
-
-                                <button type="submit" class="btn btn-success btn-block mb-4">Sign in</button>
+                                <button v-if="!showSpinner" type="submit" class="btn btn-success btn-block mb-4">Sign in</button>
+                                <div v-if="showSpinner" class="spinner-border text-success" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                                 <div class="text-center">
                                     <p>Not a member? <span class="text-success">Register first.</span></p>
                                 </div>
@@ -58,7 +60,10 @@
                                     <input type="password" id="registerRepeatPassword" class="form-control" v-model="registerUserRePassword"/>
                                     <label class="form-label" for="registerRepeatPassword">Repeat password</label>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-block mb-3">Register</button>
+                                <button v-if="!showSpinner" type="submit" class="btn btn-success btn-block mb-3">Register</button>
+                                <div v-if="showSpinner" class="spinner-border text-success" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -89,7 +94,8 @@ export default {
             registerUserRePassword: '',
             authLoginEndPoint:'https://bs-employee-management.herokuapp.com/login',
             authSignupEndPoint:'https://bs-employee-management.herokuapp.com/signup',
-            isAuthorized: false
+            isAuthorized: false,
+            showSpinner: false,
         }
     },
     methods: {
@@ -106,6 +112,7 @@ export default {
             this.registrationActive = ''
         },
         processLogin() {
+            this.showSpinner = true;
             var userInput = {
                 'email': this.loginUserEmail,
                 'password': this.loginUserPassword
@@ -126,20 +133,25 @@ export default {
                         this.showError = true;
                         this.errorMessage = "Invalid Credentials"
                     }
+                    this.showSpinner = false;
                 })
                 .catch(error => {
                     this.isAuthorized = false;
                     this.showError = true;
                     this.errorMessage = "Invalid Credentials"
+                    this.showSpinner = false;
                 });
         },
         processRegistration() {
+            this.showSpinner = true;
             if (this.registerUserEmail === '' || this.registerUserPassword === '' || this.registerUserRePassword === '') {
                 this.showError = true;
                 this.errorMessage = "Please provide required data for each field"
+                this.showSpinner = false;
             } else if (this.registerUserPassword !== this.registerUserRePassword) {
                 this.showError = true;
                 this.errorMessage = "Password do not match!"
+                this.showSpinner = false;
             } else {
                 var newUserInput = {
                     'email': this.registerUserEmail,
@@ -159,10 +171,12 @@ export default {
                             this.showError = true;
                             this.errorMessage = "Can't create user now! You should use company email id and correct information"
                         }
+                        this.showSpinner = false;
                     })
                     .catch(error => {
                         this.showError = true;
                         this.errorMessage = "Can't create user now! You should use company email id and correct information"
+                        this.showSpinner = false;
                     })
             }
         },
