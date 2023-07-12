@@ -1,7 +1,7 @@
 <template>
     <div v-if="type == 'chat-message-right'" :class="type" class="pb-4">
             <div>
-                <img src="../assets/man.png"
+                <img src="../assets/brain.png"
                      class="mr-1" alt="Chris Wood" width="40" height="40">
                 <div class="text-muted small text-nowrap mt-2">{{ time }}</div>
             </div>

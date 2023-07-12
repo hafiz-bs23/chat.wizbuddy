@@ -2,7 +2,7 @@
     <div class="border-bottom border-info l mt-2 history-item">
         <a  @click="callMethod(type,q)" class="list-group-item list-group-item-action border-0">
             <div class="d-flex align-items-center">
-                <img src="../assets/man.png"
+                <img src="../assets/brain.png"
                      class=" mr-0" alt="Vanessa Tucker" width="30" height="30">
                 <div class="flex-grow-1 mx-2">
                     {{ q }}
