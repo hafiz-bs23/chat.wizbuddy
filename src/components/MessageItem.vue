@@ -15,8 +15,8 @@
             <div class="text-muted small text-nowrap mt-2">{{ time }}</div>
         </div>
         <div class="d-flex align-items-center flex-shrink-1 rounded py-2 px-4 ml-3 rounded-3 text-white" style="background-color: #7eaacd;">
-            <div  id="messageItem">
-                {{displayMessage}}<span v-if="!stopMessage" class="blink_me">|</span>
+            <div  id="messageItem" v-html="displayMessage">
+                <span v-if="!stopMessage" class="blink_me">|</span>
             </div>
         </div>
     </div>
