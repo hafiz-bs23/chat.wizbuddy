@@ -8,11 +8,10 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPhone  } from '@fortawesome/free-solid-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faMicrosoft } from '@fortawesome/free-brands-svg-icons';
-
-library.add(faPhone ,faTwitter, faMicrosoft)
+import { faPhone, faBars, faCircleInfo, faCircleUser, faArrowRightFromBracket  } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faPaperPlane, faTrashCan, faCircleQuestion  } from '@fortawesome/free-regular-svg-icons';
+import { faTwitter, faMicrosoft } from '@fortawesome/free-brands-svg-icons';
+library.add(faPhone ,faTwitter, faMicrosoft, faComment, faPaperPlane, faBars, faTrashCan, faCircleInfo, faCircleQuestion, faCircleInfo, faCircleUser, faArrowRightFromBracket)
 
 createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)

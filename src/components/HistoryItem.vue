@@ -1,24 +1,19 @@
 <template>
-    <div class="border-bottom border-info l mt-2 history-item">
-        <a  @click="callMethod(type,q)" class="list-group-item list-group-item-action border-0">
-            <div class="d-flex align-items-center">
-                <img src="../assets/brain.png"
-                     class=" mr-0" alt="Vanessa Tucker" width="30" height="30">
-                <div class="flex-grow-1 mx-2">
-                    {{ q }}
-                    <img v-if="type == 'contractInformation'" src="../assets/information.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
-                    <img v-if="type == 'employeeInformation'" src="../assets/skill.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
-                    <img v-if="type == 'bsInfo'" src="../assets/bslogo.png" class="mr-1" alt="Vanessa Tucker" width="15" height="15">
-                </div>
-            </div>
+    <li>
+        <a href="#" @click="callMethod(q)" class="wiz-body__history__list__item">
+            <i><font-awesome-icon icon="fa-regular fa-comment" /></i>
+            <span>{{ q }}</span>
         </a>
-    </div>
+    </li>
 </template>
 
 <script>
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+
 export default {
     name: "HistoryItem",
-    props:['type','q','callMethod']
+    components: {FontAwesomeIcon},
+    props:['q','callMethod']
 }
 </script>
 
