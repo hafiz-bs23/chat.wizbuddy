@@ -88,7 +88,7 @@ export default {
         <div class="wiz-header__left">
             <button class="btn" @click="toggleHistory()" id="wiz-history-toggle"><i><font-awesome-icon icon="fa-solid fa-bars" /></i></button>
             <h4 class="wiz-header__title"> <img src="./assets/ai.png" alt="">WizzBuddy <span
-                    class="wiz-header__badge">Experiment</span></h4>
+                    class="wiz-header__badge">আসেন! আসেন! দেইখা যান, আমারে জিগায়া যান</span></h4>
         </div>
         <div class="wiz-header__right">
             <a data-bs-toggle="modal" data-bs-target="#about" class="wiz-header__right__link">

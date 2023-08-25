@@ -26,6 +26,10 @@ export default {
             if( this.index < this.message.length ){
                 this.displayMessage += this.message.charAt(this.index)
                 this.index++;
+                const chatConversation = document.querySelector(
+                    ".wiz-body__chat__conversation"
+                );
+                chatConversation.scrollTo(0, chatConversation.scrollHeight + 100);
                 setTimeout(this.typeWriter,this.speed)
             }else{
                 this.stopMessage = true;
@@ -34,11 +38,6 @@ export default {
     },
     mounted(){
         this.typeWriter()
-        const chatConversation = document.querySelector(
-            ".wiz-body__chat__conversation"
-        );
-        chatConversation.scrollTo(0, chatConversation.scrollHeight + 100);
-
     }
 }
 </script>

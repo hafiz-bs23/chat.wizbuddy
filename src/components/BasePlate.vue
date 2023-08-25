@@ -14,11 +14,11 @@
                 <ul class="wiz-body__chat__conversation">
                     <MessageItem v-for="message in messages" :type="message.type" :message="message.message" :time="message.time" />
                 </ul>
-<!--                <div v-show="queryInProgress" class="half light message-type-effect">-->
-<!--                    <div class="typing">-->
-<!--                        <span v-for="i in 5" class="circle bouncing"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div v-show="queryInProgress" class="half light message-type-effect mx-auto">
+                    <div class="typing">
+                        <span v-for="i in 5" class="circle bouncing"></span>
+                    </div>
+                </div>
                 <div class="wiz-body__chat__suggestion">
                     <ul>
                         <li v-for="(item, index) in suggestions">
@@ -129,7 +129,6 @@ export default {
             this.haveHistory = false;
         },
         logoutUser(){
-            debugger;
           this.delete_cookie();
             this.$emit('updateAuthStatus', false)
         },
