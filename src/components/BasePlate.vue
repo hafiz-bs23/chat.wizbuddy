@@ -13,12 +13,12 @@
             <div class="wiz-body__chat__inner">
                 <ul class="wiz-body__chat__conversation">
                     <MessageItem v-for="message in messages" :type="message.type" :message="message.message" :time="message.time" />
-                    <div v-show="queryInProgress" class="half light">
-                        <div class="typing">
-                            <span v-for="i in 3" class="circle bouncing"></span>
-                        </div>
-                    </div>
                 </ul>
+<!--                <div v-show="queryInProgress" class="half light message-type-effect">-->
+<!--                    <div class="typing">-->
+<!--                        <span v-for="i in 5" class="circle bouncing"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="wiz-body__chat__suggestion">
                     <ul>
                         <li v-for="(item, index) in suggestions">

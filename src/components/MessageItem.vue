@@ -34,6 +34,11 @@ export default {
     },
     mounted(){
         this.typeWriter()
+        const chatConversation = document.querySelector(
+            ".wiz-body__chat__conversation"
+        );
+        chatConversation.scrollTo(0, chatConversation.scrollHeight + 100);
+
     }
 }
 </script>
