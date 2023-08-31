@@ -98,7 +98,7 @@ export default {
             })
             var selector = 'other/'
             axios
-                .get('https://wizbuddy.herokuapp.com/'+ selector + this.query)
+                .get('http://13.215.46.12/'+ selector + this.query)
                 .then(response => {
                     this.messages.push(
                         {
@@ -156,7 +156,7 @@ export default {
         this.suggestions.push({'question': "Code of conduct for Brain Station 23"});
         this.suggestions.push({'question': "Brief about the leave policy"});
         axios
-            .get('https://wizbuddy.herokuapp.com/')
+            .get('http://13.215.46.12/')
             .then(response => {
                 this.messages.push(
                     {
